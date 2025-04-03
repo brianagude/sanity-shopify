@@ -126,10 +126,7 @@ export const blog: SchemaTypeDefinition = {
         {
           name: 'image',
           title: 'Image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
+          type: 'imageComponent',
         },
       ],
     }),

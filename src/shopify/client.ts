@@ -1,11 +1,10 @@
+import { createStorefrontApiClient } from '@shopify/storefront-api-client';
+import { storeDomain, publicAccessToken, apiVersion } from './env';
 
-import {createStorefrontApiClient} from '@shopify/storefront-api-client';
-import {storeDomain, publicAccessToken} from './env';
-
-const client = createStorefrontApiClient({
-  storeDomain: storeDomain,
-  apiVersion: '2024-04',
-  publicAccessToken
+export const client = createStorefrontApiClient({
+  storeDomain,
+  apiVersion,
+  publicAccessToken,
 });
 
-export default client;
+export default client; 

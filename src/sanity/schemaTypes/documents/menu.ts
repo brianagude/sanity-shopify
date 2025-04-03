@@ -109,10 +109,7 @@ export const menu = defineType({
                         {
                           name: 'featuredImage',
                           title: 'Featured Image',
-                          type: 'image',
-                          options: {
-                            hotspot: true,
-                          },
+                          type: 'imageComponent',
                         },
                         {
                           name: 'featuredText',

@@ -57,6 +57,7 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title('Global Content')
             .items([
+              S.documentTypeListItem("category").title("Categories"),
               S.documentTypeListItem("contactForm").title("Contact Form"),
               S.documentTypeListItem("faq").title("FAQ"),
               S.documentTypeListItem("team").title("Team Members"),
@@ -71,8 +72,8 @@ export const structure: StructureResolver = (S) =>
         S.list()
           .title('Product Content')
           .items([
-              S.documentTypeListItem("category").title("Categories"),
               S.documentTypeListItem("collection").title("Collections"),
+              S.documentTypeListItem("productVariant").title("Variants"),
               S.divider(),
               S.documentTypeListItem("product").title("Products"),
               S.listItem()

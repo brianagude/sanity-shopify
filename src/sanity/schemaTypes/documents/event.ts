@@ -133,10 +133,7 @@ export const event: SchemaTypeDefinition = {
         {
           name: 'image',
           title: 'Image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
+          type: 'imageComponent',
         },
       ],
     }),

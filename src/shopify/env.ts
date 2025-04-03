@@ -1,3 +1,4 @@
+export const apiVersion = process.env.SHOPIFY_API_VERSION || "2025-07"
 export const publicAccessToken = assertValue(
   process.env.SHOPIFY_PUBLIC_ACCESS_TOKEN,
   'Missing environment variable: SHOPIFY_PUBLIC_ACCESS_TOKEN'

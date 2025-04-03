@@ -16,7 +16,7 @@ import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
 
-const SINGLETON_TYPES = ['siteSettings', 'cart', 'checkout', 'search', 'events', 'shop', 'blog']
+const SINGLETON_TYPES = ['siteSettings', 'cart', 'checkout', 'search', 'events', 'shop', 'blog', 'productVariant']
 
 export default defineConfig({
   basePath: '/studio',
@@ -55,4 +55,4 @@ export default defineConfig({
     }),
     unsplashImageAsset(),
   ],
-})
+});

@@ -18,6 +18,7 @@ import { blog } from './documents/blog'
 import { event } from './documents/event'
 import { faq } from './documents/faq'
 import { contactForm } from './documents/contactForm'
+import { productVariant } from './documents/productVariant'
 
 // Components
 import { productCarousel } from './components/productCarousel'
@@ -29,21 +30,21 @@ import { featuredItems } from './components/featuredItems'
 import { newsletter } from './components/newsletter'
 import { testimonials } from './components/testimonials'
 import { productDetails } from './components/productDetails'
+import { pageBuilder } from './components/pageBuilder'
 
 // Blocks
 import { editorialBlockContent } from './blocks/editorialBlockContent'
 import { blockContent } from './blocks/blockContent'
+import { simpleBlockContent } from './blocks/simpleBlockContent'
 import { buttonLink } from './blocks/buttonLink'
 import { simpleLink } from './blocks/simpleLink'
 import { image } from './blocks/image'
 
+const documentTypes = [siteSettings, page, blogPost, category, event, product, productVariant, team, menu, collection, cart, checkout, search, events, shop, blog, faq, contactForm]
 
+const componentTypes = [productCarousel, productGrid, collectionNavigation, features, hero, featuredItems, newsletter, testimonials, productDetails, pageBuilder]
 
-const documentTypes = [siteSettings, page, blogPost, category, event, product, team, menu, collection, cart, checkout, search, events, shop, blog, faq, contactForm]
-
-const componentTypes = [productCarousel, productGrid, collectionNavigation, features, hero, featuredItems, newsletter, testimonials, productDetails]
-
-const blockTypes = [blockContent, buttonLink, simpleLink, image, editorialBlockContent]
+const blockTypes = [blockContent, buttonLink, simpleLink, image, editorialBlockContent, simpleBlockContent]
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [...documentTypes, ...blockTypes, ...componentTypes],

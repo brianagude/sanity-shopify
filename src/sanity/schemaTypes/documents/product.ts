@@ -1,77 +1,146 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import { defineField, defineType } from 'sanity'
 import {TagIcon} from '@sanity/icons'
-export const product: SchemaTypeDefinition = {
+
+export const product = defineType({
   name: 'product',
   title: 'Product',
   type: 'document',
   icon: TagIcon,
+  groups: [
+    { name: 'content', title: 'Content' },
+    { name: 'shopify', title: 'Shopify' },
+    { name: 'seo', title: 'SEO' },
+  ],
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'description',
-      title: 'Description',
-      type: 'array',
-      of: [{ type: 'block' }],
-    },
-    {
+      group: 'content',
+    }),
+    defineField({
+      name: 'text',
+      type: 'simpleBlockContent',
+      group: 'content',
+    }),
+    defineField({
       name: 'images',
       title: 'Images',
       type: 'array',
+      of: [{ type: 'imageComponent' }],
+      group: 'content',
+    }),
+    defineField({
+      name: 'productDetails',
+      title: 'Product Details',
+      group: 'content',
+      type: 'array',
       of: [
         {
-          type: 'imageComponent'
+          type: 'object',
+          fields: [
+            { name: 'title', title: 'Title', type: 'string' },
+            { name: 'text', title: 'Text', type: 'simpleBlockContent' },
+          ],
         },
       ],
-    },
-    {
-      name: 'shopifyId',
-      title: 'Shopify ID',
-      type: 'string',
-      description: 'The ID of the product in Shopify',
-    },
-    {
-      name: 'shopifyHandle',
-      title: 'Shopify Handle',
-      type: 'string',
-      description: 'The handle of the product in Shopify',
-    },
-    {
-      name: 'inventory',
-      title: 'Inventory',
-      type: 'number',
-      validation: (Rule) => Rule.required().min(0),
-    },
-    {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{ type: 'string' }],
-    },
-    {
-      name: 'tags',
-      title: 'Tags',
-      type: 'array',
-      of: [{ type: 'string' }],
-    },
+    }),
+    defineField({
+      name: 'store',
+      title: 'Shopify Product Info',
+      type: 'object',
+      group: 'shopify',
+      readOnly: true,
+      fields: [
+        { name: 'title', type: 'string', readOnly: true },
+        { name: 'slug', type: 'slug', readOnly: true },
+        { name: 'descriptionHtml', type: 'text', readOnly: true },
+        { name: 'previewImageUrl', type: 'string', readOnly: true },
+        { name: 'status', type: 'string', readOnly: true },
+        {
+          name: 'priceRange',
+          type: 'object',
+          readOnly: true,
+          fields: [
+            { name: 'minVariantPrice', type: 'number' },
+            { name: 'maxVariantPrice', type: 'number' },
+          ]
+        },
+        {
+          name: 'tags',
+          title: 'Tags',
+          type: 'array',
+          readOnly: true,
+          of: [
+            {
+              type: 'object',
+              name: 'option',
+              fields: [
+                { name: 'name', type: 'string', readOnly: true },
+                {
+                  name: 'tags',
+                  type: 'array',
+                  of: [{ type: 'string' }],
+                  readOnly: true,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: 'variants',
+          title: 'Variants',
+          type: 'array',
+          of: [
+            {
+              type: 'reference',
+              weak: false,
+              to: [{ type: 'productVariant' }],
+            },
+          ],
+          readOnly: true,
+        },
+        {
+          name: 'options',
+          title: 'Options',
+          type: 'array',
+          readOnly: true,
+          of: [
+            {
+              type: 'object',
+              name: 'option',
+              fields: [
+                { name: 'name', type: 'string', readOnly: true },
+                {
+                  name: 'values',
+                  type: 'array',
+                  of: [{ type: 'string' }],
+                  readOnly: true,
+                },
+              ],
+            },
+          ],
+        },
+        { name: 'productType', type: 'string', readOnly: true },
+        { name: 'vendor', type: 'string', readOnly: true },
+        { name: 'id', type: 'number', readOnly: true },
+        { name: 'gid', type: 'string', readOnly: true },
+        { 
+          name: 'createdAt', 
+          type: 'datetime',
+          readOnly: true,
+          options: {
+            dateFormat: 'MM-DD-YYYY',
+            timeFormat: 'HH:mm',
+          } 
+        },
+        { name: 'isDeleted', type: 'boolean', readOnly: true },
+      ]
+    })
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'store.title',
       media: 'images.0',
     },
     prepare({ title, media }) {
@@ -81,4 +150,4 @@ export const product: SchemaTypeDefinition = {
       }
     },
   },
-} 
+}) 

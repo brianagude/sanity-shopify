@@ -1,4 +1,4 @@
-import client from "./client";
+import { client } from './client';
 
 interface ShopifyImage {
   url: string;
@@ -14,6 +14,8 @@ interface ShopifyVariant {
   id: string;
   title: string;
   price: ShopifyPrice;
+  availableForSale: boolean;
+  quantityAvailable: number;
 }
 
 interface ShopifyProduct {
@@ -71,6 +73,8 @@ export const getProductByHandle = async (handle: string): Promise<ShopifyProduct
                 amount
                 currencyCode
               }
+              availableForSale
+              quantityAvailable
             }
           }
         }
@@ -127,4 +131,4 @@ export const getProducts = async (first: number = 10): Promise<ShopifyProductEdg
   }
 
   return data.products.edges.map((edge: ShopifyProductEdge) => edge.node);
-};
+}; 

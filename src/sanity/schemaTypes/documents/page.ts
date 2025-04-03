@@ -23,19 +23,6 @@ export const page: SchemaTypeDefinition = {
       },
       validation: (Rule) => Rule.required(),
     },
-    // {
-    //   name: 'content',
-    //   title: 'Page Content',
-    //   type: 'array',
-    //   of: [
-    //     { type: 'block' },
-    //     { type: 'image' },
-    //     { type: 'code' },
-    //     { type: 'list' },
-    //     { type: 'listItem' },
-    //     // We'll add more component types here as we build them
-    //   ],
-    // },
     {
       name: 'seo',
       title: 'SEO',

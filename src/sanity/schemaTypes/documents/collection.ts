@@ -5,12 +5,17 @@ export const collection = defineType({
   title: 'Collection',
   type: 'document',
   icon: TiersIcon,
+  groups: [
+    { name: 'content', title: 'Content' },
+    { name: 'shopify', title: 'Shopify' },
+    { name: 'seo', title: 'SEO' },
+  ],
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      group: 'content',
     }),
     defineField({
       name: 'slug',
@@ -20,24 +25,20 @@ export const collection = defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      group: 'content',
     }),
     defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
       rows: 4,
+      group: 'content',
     }),
     defineField({
       name: 'image',
       title: 'Collection Image',
       type: 'imageComponent',
-    }),
-    defineField({
-      name: 'shopifyId',
-      title: 'Shopify Collection ID',
-      type: 'string',
-      description: 'The ID of the corresponding Shopify collection',
+      group: 'content',
     }),
     defineField({
       name: 'products',
@@ -49,11 +50,13 @@ export const collection = defineType({
           to: [{ type: 'product' }],
         },
       ],
+      group: 'content',
     }),
     defineField({
       name: 'seo',
       title: 'SEO',
       type: 'object',
+      group: 'seo',
       fields: [
         {
           name: 'title',
@@ -73,16 +76,66 @@ export const collection = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'store',
+      title: 'Shopify Collection Info',
+      type: 'object',
+      readOnly: true,
+      group: 'shopify',
+      fields: [
+        { name: 'title', type: 'string', readOnly: true },
+        {
+          name: 'slug',
+          type: 'slug',
+          readOnly: true,
+        },
+        {
+          name: 'descriptionHtml',
+          type: 'text',
+          readOnly: true,
+        },
+        {
+          name: 'sortOrder',
+          type: 'string',
+          readOnly: true,
+        },
+        {
+          name: 'gid',
+          type: 'string',
+          readOnly: true,
+        },
+        {
+          name: 'createdAt',
+          type: 'datetime',
+          readOnly: true,
+          options: {
+            dateFormat: 'MM-DD-YYYY',
+            timeFormat: 'HH:mm',
+          }
+        },
+        {
+          name: 'id',
+          type: 'number',
+          readOnly: true,
+        },
+        {
+          name: 'isDeleted',
+          type: 'boolean',
+          readOnly: true,
+        },
+      ]
+    }),
   ],
   preview: {
     select: {
       title: 'title',
+      shopifyTitle: 'store.title',
       subtitle: 'description',
       media: 'image',
     },
-    prepare({ title, subtitle, media }) {
+    prepare({ title, shopifyTitle, subtitle, media }) {
       return {
-        title,
+        title: title || shopifyTitle || 'Untitled Collection',
         subtitle,
         media,
       }
