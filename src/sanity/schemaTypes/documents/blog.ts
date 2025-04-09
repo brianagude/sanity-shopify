@@ -5,6 +5,10 @@ export const blog: SchemaTypeDefinition = {
   title: 'Blog',
   type: 'document',
   icon: ComposeIcon,
+  groups: [
+    { name: 'content', title: 'Content' },
+    { name: 'seo', title: 'SEO' },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -109,25 +113,28 @@ export const blog: SchemaTypeDefinition = {
     }),
     defineField({
       name: 'seo',
-      title: 'SEO',
+      title: 'Overwrite default SEO settings',
       type: 'object',
+      group: 'seo',
       fields: [
-        {
-          name: 'title',
-          title: 'Title',
+        defineField({
+          name: 'metaTitle',
+          title: 'Default Meta Title',
           type: 'string',
-        },
-        {
-          name: 'description',
-          title: 'Description',
+          validation: (Rule) => Rule.max(60).warning('Meta titles should be under 60 characters'),
+        }),
+        defineField({
+          name: 'metaDescription',
+          title: 'Default Meta Description',
           type: 'text',
           rows: 3,
-        },
-        {
-          name: 'image',
-          title: 'Image',
-          type: 'imageComponent',
-        },
+          validation: (Rule) => Rule.max(160).warning('Meta descriptions should be under 160 characters'),
+        }),
+        defineField({
+          name: 'metaImage',
+          title: 'Default Meta Image',
+          type: 'image',
+        }),
       ],
     }),
   ],

@@ -22,10 +22,6 @@ export const pageBuilder: SchemaTypeDefinition = {
       title: 'Product Carousel',
     },
     {
-      type: 'collectionNavigation',
-      title: 'Collection Navigation',
-    },
-    {
       type: 'featuredItems',
       title: 'Featured Items',
     },
@@ -36,10 +32,6 @@ export const pageBuilder: SchemaTypeDefinition = {
     {
       type: 'testimonials',
       title: 'Testimonials',
-    },
-    {
-      type: 'productDetails',
-      title: 'Product Details',
     },
     {
       type: 'blockContent',

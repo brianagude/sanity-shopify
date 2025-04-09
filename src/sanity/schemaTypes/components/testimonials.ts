@@ -45,7 +45,7 @@ export const testimonials: SchemaTypeDefinition = {
                 {
                   name: 'image',
                   title: 'Image',
-                  type: 'imageComponent',
+                  type: 'image',
                 },
               ],
             },

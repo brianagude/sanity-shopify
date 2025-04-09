@@ -7,7 +7,7 @@ export const product = defineType({
   type: 'document',
   icon: TagIcon,
   groups: [
-    { name: 'content', title: 'Content' },
+    { name: 'content', title: 'Content', default: true },
     { name: 'shopify', title: 'Shopify' },
     { name: 'seo', title: 'SEO' },
   ],
@@ -19,7 +19,7 @@ export const product = defineType({
       group: 'content',
     }),
     defineField({
-      name: 'text',
+      name: 'content',
       type: 'simpleBlockContent',
       group: 'content',
     }),
@@ -43,6 +43,38 @@ export const product = defineType({
             { name: 'text', title: 'Text', type: 'simpleBlockContent' },
           ],
         },
+      ],
+    }),
+    defineField({
+      name: 'pageBuilder',
+      title: 'Page Content',
+      type: 'pageBuilder',
+      group: 'content',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'Overwrite default SEO settings',
+      type: 'object',
+      group: 'seo',
+      fields: [
+        defineField({
+          name: 'metaTitle',
+          title: 'Default Meta Title',
+          type: 'string',
+          validation: (Rule) => Rule.max(60).warning('Meta titles should be under 60 characters'),
+        }),
+        defineField({
+          name: 'metaDescription',
+          title: 'Default Meta Description',
+          type: 'text',
+          rows: 3,
+          validation: (Rule) => Rule.max(160).warning('Meta descriptions should be under 160 characters'),
+        }),
+        defineField({
+          name: 'metaImage',
+          title: 'Default Meta Image',
+          type: 'image',
+        }),
       ],
     }),
     defineField({

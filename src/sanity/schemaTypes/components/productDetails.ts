@@ -79,12 +79,6 @@ export const productDetails: SchemaTypeDefinition = {
       initialValue: false,
     }),
     defineField({
-      name: 'showWishlist',
-      title: 'Show Wishlist',
-      type: 'boolean',
-      initialValue: true,
-    }),
-    defineField({
       name: 'showShare',
       title: 'Show Share',
       type: 'boolean',
@@ -113,63 +107,6 @@ export const productDetails: SchemaTypeDefinition = {
       title: 'Show Tags',
       type: 'boolean',
       initialValue: false,
-    }),
-    defineField({
-      name: 'showReviews',
-      title: 'Show Reviews',
-      type: 'boolean',
-      initialValue: true,
-    }),
-    defineField({
-      name: 'showRelatedProducts',
-      title: 'Show Related Products',
-      type: 'boolean',
-      initialValue: true,
-    }),
-    defineField({
-      name: 'relatedProductsCount',
-      title: 'Related Products Count',
-      type: 'number',
-      options: {
-        list: [
-          { title: '4', value: 4 },
-          { title: '8', value: 8 },
-          { title: '12', value: 12 },
-        ],
-      },
-      initialValue: 4,
-      hidden: ({ parent }) => !parent?.showRelatedProducts,
-    }),
-    defineField({
-      name: 'showTabs',
-      title: 'Show Tabs',
-      type: 'boolean',
-      initialValue: true,
-    }),
-    defineField({
-      name: 'tabs',
-      title: 'Tabs',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {
-              name: 'title',
-              title: 'Tab Title',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: 'content',
-              title: 'Tab Content',
-              type: 'blockContent',
-              validation: (Rule) => Rule.required(),
-            },
-          ],
-        },
-      ],
-      hidden: ({ parent }) => !parent?.showTabs,
     }),
     defineField({
       name: 'cta',

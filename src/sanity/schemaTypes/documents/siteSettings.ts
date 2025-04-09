@@ -159,9 +159,6 @@ export const siteSettings = defineType({
           name: 'metaImage',
           title: 'Default Meta Image',
           type: 'image',
-          options: {
-            hotspot: true,
-          },
         }),
       ],
     }),

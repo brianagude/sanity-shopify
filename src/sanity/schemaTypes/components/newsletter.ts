@@ -6,11 +6,6 @@ export const newsletter: SchemaTypeDefinition = {
   type: 'object',
   fields: [
     defineField({
-      name: 'content',
-      title: 'Content',
-      type: 'blockContent',
-    }),
-    defineField({
       name: 'layout',
       title: 'Layout',
       type: 'string',
@@ -44,10 +39,9 @@ export const newsletter: SchemaTypeDefinition = {
       initialValue: true,
     }),
     defineField({
-      name: 'description',
+      name: 'content',
       title: 'Description',
-      type: 'text',
-      rows: 2,
+      type: 'simpleBlockContent',
       initialValue: 'Get the latest updates on new products and upcoming sales.',
       hidden: ({ parent }) => !parent?.showDescription,
     }),

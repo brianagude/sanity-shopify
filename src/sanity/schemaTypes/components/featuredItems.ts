@@ -1,5 +1,4 @@
 import { defineField, SchemaTypeDefinition } from 'sanity'
-import { buttonLink } from '../blocks/buttonLink'
 
 export const featuredItems: SchemaTypeDefinition = {
   name: 'featuredItems',
@@ -51,22 +50,21 @@ export const featuredItems: SchemaTypeDefinition = {
               validation: (Rule) => Rule.required(),
             },
             {
-              name: 'cta',
-              title: 'Call to Action',
-              type: 'object',
-              fields: buttonLink.fields,
-              description: 'Optional: Override the default CTA for this item',
+              name: 'ctaText',
+              title: 'CTA Text',
+              type: 'string',
+              description: 'Optional: Override the default CTA text from the referenced item',
             },
+            
           ],
         },
       ],
       validation: (Rule) => Rule.min(1).required(),
     }),
     defineField({
-      name: 'cta',
-      title: 'Section Call to Action',
-      type: 'object',
-      fields: buttonLink.fields,
+      name: 'defaultCtaText',
+      title: 'Default CTA Text',
+      type: 'string',
     }),
     defineField({
       name: 'layout',

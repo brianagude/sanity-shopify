@@ -6,7 +6,7 @@ export const productCarousel = defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'text',
+      name: 'content',
       title: 'Block Text',
       type: 'blockContent',
     }),

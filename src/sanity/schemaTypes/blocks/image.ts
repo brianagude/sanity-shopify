@@ -58,8 +58,8 @@ export const image = defineType({
           { title: "Auto", value: "auto" },
           { title: "Square (1:1)", value: "1:1" },
           { title: "Portrait (4:5)", value: "4:5" },
-          { title: "Landscape (16:9)", value: "16:9" },
-          { title: "Wide (21:9)", value: "21:9" },
+          { title: "Portrait (3:4)", value: "3:4" },
+          { title: "Rectangle (5:4)", value: "5:4" }
         ],
         layout: "radio",
       },
@@ -78,7 +78,7 @@ export const image = defineType({
         ],
         layout: "radio",
       },
-      initialValue: "cover",
+      initialValue: "contain",
     }),
   ],
   preview: {
