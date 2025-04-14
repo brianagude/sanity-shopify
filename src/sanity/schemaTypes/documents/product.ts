@@ -14,14 +14,17 @@ export const product = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Product Title',
       type: 'string',
       group: 'content',
+      description: 'Used to override the product title in the Shopify store',
     }),
     defineField({
-      name: 'content',
+      name: 'description',
+      title: 'Product Description',
       type: 'simpleBlockContent',
       group: 'content',
+      description: 'Used to override the product description in the Shopify store',
     }),
     defineField({
       name: 'images',
@@ -29,27 +32,23 @@ export const product = defineType({
       type: 'array',
       of: [{ type: 'imageComponent' }],
       group: 'content',
+      description: 'Used to override the default product image in the Shopify store. The first image will be used as the featured product image.',
     }),
     defineField({
       name: 'productDetails',
       title: 'Product Details',
       group: 'content',
       type: 'array',
+      description: 'Additional product details to display on the product page in accordion format',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'title', title: 'Title', type: 'string' },
+            { name: 'subheading', title: 'Subheading', type: 'string' },
             { name: 'text', title: 'Text', type: 'simpleBlockContent' },
           ],
         },
       ],
-    }),
-    defineField({
-      name: 'pageBuilder',
-      title: 'Page Content',
-      type: 'pageBuilder',
-      group: 'content',
     }),
     defineField({
       name: 'seo',
@@ -61,6 +60,7 @@ export const product = defineType({
           name: 'metaTitle',
           title: 'Default Meta Title',
           type: 'string',
+          description: 'Used to override the default meta title in settings',
           validation: (Rule) => Rule.max(60).warning('Meta titles should be under 60 characters'),
         }),
         defineField({
@@ -68,12 +68,14 @@ export const product = defineType({
           title: 'Default Meta Description',
           type: 'text',
           rows: 3,
-          validation: (Rule) => Rule.max(160).warning('Meta descriptions should be under 160 characters'),
+          description: 'Used to override the default meta description in settings',
+          validation: (Rule) => Rule.min(50).max(160).warning('Meta descriptions should be between 50 and 160 characters'),
         }),
         defineField({
           name: 'metaImage',
           title: 'Default Meta Image',
           type: 'image',
+          description: 'Used to override the default meta image in settings. Should be 1200x630px',
         }),
       ],
     }),

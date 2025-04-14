@@ -1,5 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
-import {BillIcon, CogIcon, ControlsIcon, DocumentsIcon, DocumentTextIcon, FolderIcon, PackageIcon, SearchIcon, TagsIcon, TrolleyIcon, VersionsIcon} from '@sanity/icons'
+import {CogIcon, ControlsIcon, DocumentsIcon, DocumentTextIcon, FolderIcon, PackageIcon, SearchIcon, TagsIcon, TrolleyIcon, VersionsIcon} from '@sanity/icons'
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
@@ -7,6 +7,18 @@ export const structure: StructureResolver = (S) =>
     .id('root')
     .title('Content')
     .items([
+       S.listItem()
+        .id("home")
+        .schemaType("home")
+        .title("Home Page")
+        .icon(CogIcon)
+        .child(
+          S.document()
+            .id("home")
+            .schemaType("home")
+            .documentId("home")
+            .title("Home Page")
+        ),
       S.documentTypeListItem("page").title("Pages").icon(DocumentsIcon),    
       S.divider(),
 
@@ -113,18 +125,6 @@ export const structure: StructureResolver = (S) =>
                     .schemaType("cart")
                     .documentId("cart")
                     .title("Cart")
-                ),
-              S.listItem()
-                .id("checkout")
-                .schemaType("checkout")
-                .title("Checkout")
-                .icon(BillIcon)
-                .child(
-                  S.document()
-                    .id("checkout")
-                    .schemaType("checkout")
-                    .documentId("checkout")
-                    .title("Checkout")
                 ),
               S.documentTypeListItem("menu").title("Menus"),
               S.listItem()

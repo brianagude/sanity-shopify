@@ -1,5 +1,5 @@
 export const apiVersion =
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-04-01'
+  process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-02-27'
 
 export const dataset = assertValue(
   process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -18,3 +18,5 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
 
   return v
 }
+
+export const studioUrl = '/studio'

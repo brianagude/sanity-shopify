@@ -22,15 +22,6 @@ export const siteSettings = defineType({
       group: 'settings',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'homePage',
-      title: 'Home Page',
-      type: 'reference',
-      to: [{ type: 'page' }],
-      description: 'Select which page should be treated as the home page',
-      group: 'settings',
-      validation: (Rule) => Rule.required(),
-    }),
 
     // Header Settings
     defineField({
@@ -137,28 +128,30 @@ export const siteSettings = defineType({
 
     // Default SEO Settings
     defineField({
-      name: 'defaultSeo',
+      name: 'seo',
       title: 'Default SEO Settings',
       type: 'object',
       group: 'seo',
+      validation: (Rule) => Rule.required(),
       fields: [
         defineField({
           name: 'metaTitle',
           title: 'Default Meta Title',
           type: 'string',
-          validation: (Rule) => Rule.max(60).warning('Meta titles should be under 60 characters'),
+          validation: (Rule) => Rule.required().max(60).warning('Meta titles should be under 60 characters'),
         }),
         defineField({
           name: 'metaDescription',
           title: 'Default Meta Description',
           type: 'text',
           rows: 3,
-          validation: (Rule) => Rule.max(160).warning('Meta descriptions should be under 160 characters'),
+          validation: (Rule) => Rule.required().max(160).warning('Meta descriptions should be under 160 characters'),
         }),
         defineField({
           name: 'metaImage',
           title: 'Default Meta Image',
           type: 'image',
+          validation: (Rule) => Rule.required(),
         }),
       ],
     }),

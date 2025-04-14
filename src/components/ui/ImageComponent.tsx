@@ -1,6 +1,5 @@
 // components/ui/Image.tsx
 
-
 import Image from 'next/image'
 import { clsx } from 'clsx'
 import { ExtendedImageComponent } from '@/sanity/lib/typeOverrides'
