@@ -5,6 +5,7 @@ import {toPlainText} from 'next-sanity'
 import {draftMode} from 'next/headers'
 import { ImageComponent } from '@/components/ui/ImageComponent'
 import {notFound} from 'next/navigation'
+import { SimpleBlockContent } from '@/components/inputs/PortableTextComponents'
 
 type Props = {
   params: Promise<{slug: string}>
@@ -50,10 +51,10 @@ export default async function PageSlugRoute({params}: Props) {
   return (
     <div>
       <h1>product info</h1>
-      <p>{title ? title : store.title ? store.title : ''}</p>
-      <p>{description ? description : store.descriptionHtml ? store.descriptionHtml : ''}</p> 
+      <p>{title ? title : store?.title ? store?.title : ''}</p>
+      {description ? <SimpleBlockContent value={description} /> : store?.descriptionHtml ? <p>{store.descriptionHtml}</p> : null} 
       <div>
-        {featuredImage.asset && <ImageComponent image={featuredImage} />}
+        {featuredImage?.image?.asset && <ImageComponent image={featuredImage} />}
       </div>
     </div>
   )

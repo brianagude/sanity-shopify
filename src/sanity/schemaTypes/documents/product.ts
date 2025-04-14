@@ -100,40 +100,40 @@ export const product = defineType({
             { name: 'maxVariantPrice', type: 'number' },
           ]
         },
-        {
-          name: 'tags',
-          title: 'Tags',
-          type: 'array',
-          readOnly: true,
-          of: [
-            {
-              type: 'object',
-              name: 'option',
-              fields: [
-                { name: 'name', type: 'string', readOnly: true },
-                {
-                  name: 'tags',
-                  type: 'array',
-                  of: [{ type: 'string' }],
-                  readOnly: true,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          name: 'variants',
-          title: 'Variants',
-          type: 'array',
-          of: [
-            {
-              type: 'reference',
-              weak: false,
-              to: [{ type: 'productVariant' }],
-            },
-          ],
-          readOnly: true,
-        },
+        // {
+        //   name: 'tags',
+        //   title: 'Tags',
+        //   type: 'array',
+        //   readOnly: true,
+        //   of: [
+        //     {
+        //       type: 'object',
+        //       name: 'option',
+        //       fields: [
+        //         { name: 'name', type: 'string', readOnly: true },
+        //         {
+        //           name: 'tags',
+        //           type: 'array',
+        //           of: [{ type: 'string' }],
+        //           readOnly: true,
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
+        // {
+        //   name: 'variants',
+        //   title: 'Variants',
+        //   type: 'array',
+        //   of: [
+        //     {
+        //       type: 'reference',
+        //       weak: false,
+        //       to: [{ type: 'productVariant' }],
+        //     },
+        //   ],
+        //   readOnly: true,
+        // },
         {
           name: 'options',
           title: 'Options',

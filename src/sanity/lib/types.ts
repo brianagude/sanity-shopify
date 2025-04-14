@@ -1830,22 +1830,432 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 // Variable: HOME_PAGE_QUERY
 // Query: *[_type == "home"][0]{    _id,    _type,    overview,    showcaseProjects[]{      _key,      ...@->{        _id,        _type,        coverImage,        overview,        "slug": slug.current,        tags,        title,      }    },    title,  }
 export type HOME_PAGE_QUERYResult = null
+// Variable: PRODUCT_PAGE_QUERY
+// Query: *[_type == "product" && store.slug.current == $slug][0]{    _id,    _type,    title,    description,    "featuredImage": images[0]{ image{   alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  }, } },    "galleryImages": images[1...10]{ image{   asset->{    _id,    url  },  alt } },    productDetails[]{      title,      text    },    store{      title,      "slug": slug.current,      previewImageUrl,      descriptionHtml,      gid,      priceRange{        minVariantPrice,        maxVariantPrice      },    },      seo {    metaTitle,    metaDescription,    metaImage  },    pageBuilder[]{      _key,      _type,      ...select(        _type == "hero" => {   content,  image {      alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  },  },  overlay,  ctas[]{      text,  url,  internalPage->{    _id,    _type,    title,    slug  },  style,  size  },  layout,  height },        _type == "features" => {   content,  features[]{    title,    description,    icon,    image {        alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  },    }  },  cta {      text,  url,  internalPage->{    _id,    _type,    title,    slug  },  style,  size  },  layout,  columns,  background },        _type == "featuredItems" => {   content,  items[]{    title,    description,    image {        alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  },    },    item->{      _id,      _type,      title,      slug    },    ctaText  } },        _type == "productCarousel" => {   content,    products[]{      _id,      _key,      title,      content,      images[]{          alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  },      },      slug,      store {        status,        priceRange {          minVariantPrice,          maxVariantPrice        },        tags    }  } },        _type == "newsletter" => {   _type,  _key },        _type == "productDetails" => {   cta {      text,  url,  internalPage->{    _id,    _type,    title,    slug  },  style,  size  },  product->{    _id,    _key,    title,    content,    images[]{        alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  },    },    slug,    store  } },        _type == "productGrid" => {   collection->{    _id,    title,    slug  },  products[]{    _id,    _key,    title,    content,    images[]{        alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  },    },    slug,    store {      status,      priceRange {        minVariantPrice,        maxVariantPrice      },      tags    }  },  cta {      text,  url,  internalPage->{    _id,    _type,    title,    slug  },  style,  size  } },        _type == "testimonials" => {   testimonials[]{    _key,    author,    quote  },  cta {      text,  url,  internalPage->{    _id,    _type,    title,    slug  },  style,  size  } }      )    }  }
+export type PRODUCT_PAGE_QUERYResult = {
+  _id: string
+  _type: 'product'
+  title: string | null
+  description: null
+  featuredImage: {
+    image: {
+      alt: string | null
+      _key: null
+      asset: {
+        _id: string
+        _type: 'sanity.imageAsset'
+        metadata: {
+          lqip: string | null
+          dimensions: {
+            width: number | null
+            height: number | null
+          } | null
+          palette: {
+            dominant: {
+              background: string | null
+              foreground: string | null
+              population: number | null
+              title: string | null
+            } | null
+          } | null
+        } | null
+      } | null
+      hotspot: {
+        x: number | null
+        y: number | null
+        height: number | null
+        width: number | null
+      } | null
+    } | null
+  } | null
+  galleryImages: Array<{
+    image: {
+      asset: {
+        _id: string
+        url: string | null
+      } | null
+      alt: string | null
+    } | null
+  }> | null
+  productDetails: Array<{
+    title: string | null
+    text: SimpleBlockContent | null
+  }> | null
+  store: {
+    title: string | null
+    slug: string | null
+    previewImageUrl: string | null
+    descriptionHtml: string | null
+    gid: string | null
+    priceRange: {
+      minVariantPrice: number | null
+      maxVariantPrice: number | null
+    } | null
+  } | null
+  seo: {
+    metaTitle: null
+    metaDescription: null
+    metaImage: null
+  } | null
+  pageBuilder: Array<
+    | null
+    | {
+        _key: string
+        _type: 'featuredItems'
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'large' | 'lead' | 'normal' | 'small'
+          listItem?: 'bullet' | 'check' | 'number'
+          markDefs?: Array<{
+            href?: string
+            target?: '_blank' | '_self'
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }> | null
+        items: Array<{
+          title: string | null
+          description: string | null
+          image: {
+            alt: null
+            _key: null
+            asset: null
+            hotspot: null
+          } | null
+          item:
+            | {
+                _id: string
+                _type: 'blogPost'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'collection'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'event'
+                title: string | null
+                slug: null
+              }
+            | {
+                _id: string
+                _type: 'product'
+                title: string | null
+                slug: null
+              }
+            | null
+          ctaText: string | null
+        }> | null
+      }
+    | {
+        _key: string
+        _type: 'features'
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'large' | 'lead' | 'normal' | 'small'
+          listItem?: 'bullet' | 'check' | 'number'
+          markDefs?: Array<{
+            href?: string
+            target?: '_blank' | '_self'
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }> | null
+        features: Array<{
+          title: string | null
+          description: string | null
+          icon:
+            | 'check'
+            | 'gear'
+            | 'heart'
+            | 'lightning'
+            | 'none'
+            | 'rocket'
+            | 'shield'
+            | 'star'
+            | null
+          image: {
+            alt: null
+            _key: null
+            asset: null
+            hotspot: null
+          } | null
+        }> | null
+        cta: {
+          text: string | null
+          url: string | null
+          internalPage:
+            | {
+                _id: string
+                _type: 'blogPost'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'event'
+                title: string | null
+                slug: null
+              }
+            | {
+                _id: string
+                _type: 'page'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'product'
+                title: string | null
+                slug: null
+              }
+            | null
+          style: 'ghost' | 'primary' | 'secondary' | 'text' | null
+          size: 'default' | 'large' | 'small' | null
+        } | null
+        layout: 'cards' | 'grid' | 'list' | null
+        columns: 2 | 3 | 4 | null
+        background: 'darkGray' | 'lightGray' | 'primary' | 'secondary' | 'transparent' | null
+      }
+    | {
+        _key: string
+        _type: 'hero'
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'large' | 'lead' | 'normal' | 'small'
+          listItem?: 'bullet' | 'check' | 'number'
+          markDefs?: Array<{
+            href?: string
+            target?: '_blank' | '_self'
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }> | null
+        image: {
+          alt: null
+          _key: null
+          asset: null
+          hotspot: null
+        } | null
+        overlay: Array<string> | null
+        ctas: Array<{
+          text: string | null
+          url: string | null
+          internalPage:
+            | {
+                _id: string
+                _type: 'blogPost'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'event'
+                title: string | null
+                slug: null
+              }
+            | {
+                _id: string
+                _type: 'page'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'product'
+                title: string | null
+                slug: null
+              }
+            | null
+          style: 'ghost' | 'primary' | 'secondary' | 'text' | null
+          size: 'default' | 'large' | 'small' | null
+        }> | null
+        layout: 'center' | 'left' | 'right' | null
+        height: 'fullScreen' | 'large' | 'medium' | 'small' | null
+      }
+    | {
+        _key: string
+        _type: 'newsletter'
+      }
+    | {
+        _key: string
+        _type: 'productCarousel'
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'large' | 'lead' | 'normal' | 'small'
+          listItem?: 'bullet' | 'check' | 'number'
+          markDefs?: Array<{
+            href?: string
+            target?: '_blank' | '_self'
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }> | null
+        products: Array<{
+          _id: null
+          _key: string
+          title: null
+          content: null
+          images: null
+          slug: null
+          store: null
+        }> | null
+      }
+    | {
+        _key: string
+        _type: 'productGrid'
+        collection: {
+          _id: string
+          title: string | null
+          slug: Slug | null
+        } | null
+        products: Array<{
+          _id: null
+          _key: string
+          title: null
+          content: null
+          images: null
+          slug: null
+          store: null
+        }> | null
+        cta: {
+          text: string | null
+          url: string | null
+          internalPage:
+            | {
+                _id: string
+                _type: 'blogPost'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'event'
+                title: string | null
+                slug: null
+              }
+            | {
+                _id: string
+                _type: 'page'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'product'
+                title: string | null
+                slug: null
+              }
+            | null
+          style: 'ghost' | 'primary' | 'secondary' | 'text' | null
+          size: 'default' | 'large' | 'small' | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'testimonials'
+        testimonials: Array<{
+          _key: string
+          author: {
+            name?: string
+            title?: string
+            image?: {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            }
+          } | null
+          quote: string | null
+        }> | null
+        cta: {
+          text: string | null
+          url: string | null
+          internalPage:
+            | {
+                _id: string
+                _type: 'blogPost'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'event'
+                title: string | null
+                slug: null
+              }
+            | {
+                _id: string
+                _type: 'page'
+                title: string | null
+                slug: Slug | null
+              }
+            | {
+                _id: string
+                _type: 'product'
+                title: string | null
+                slug: null
+              }
+            | null
+          style: 'ghost' | 'primary' | 'secondary' | 'text' | null
+          size: 'default' | 'large' | 'small' | null
+        } | null
+      }
+  > | null
+} | null
 // Variable: ALL_PRODUCTS_QUERY
-// Query: *[_type == "product"] {    _id,    _type,    title,    images[]{   asset->{    _id,    _type,    url,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  },  crop {    top,    bottom,    left,    right  },  alt,  priority,  caption,  _type,  aspectRatio,  objectFit },    "slug": store.slug.current,    store{      title,      "slug": slug.current,      previewImageUrl,      gid,      status,      priceRange{        minVariantPrice,        maxVariantPrice      }    },  }
+// Query: *[_type == "product"] {    _id,    _type,    title,    images[]{   alt,  _key,  asset->{    _id,    _type,    metadata {      lqip,      dimensions {        width,        height      },      palette {        dominant {          background,          foreground,          population,          title        }      }    }  },  hotspot {    x,    y,    height,    width  }, },    "slug": store.slug.current,    store{      title,      "slug": slug.current,      previewImageUrl,      gid,      status,      priceRange{        minVariantPrice,        maxVariantPrice      }    },  }
 export type ALL_PRODUCTS_QUERYResult = Array<{
   _id: string
   _type: 'product'
   title: string | null
   images: Array<{
+    alt: null
+    _key: string
     asset: null
     hotspot: null
-    crop: null
-    alt: null
-    priority: null
-    caption: null
-    _type: 'imageComponent'
-    aspectRatio: '1:1' | '3:4' | '4:5' | '5:4' | 'auto' | null
-    objectFit: 'contain' | 'cover' | 'fill' | null
   }> | null
   slug: string | null
   store: {
@@ -1990,7 +2400,8 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    overview,\n    showcaseProjects[]{\n      _key,\n      ...@->{\n        _id,\n        _type,\n        coverImage,\n        overview,\n        "slug": slug.current,\n        tags,\n        title,\n      }\n    },\n    title,\n  }\n': HOME_PAGE_QUERYResult
-    '\n  *[_type == "product"] {\n    _id,\n    _type,\n    title,\n    images[]{ \n  asset->{\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n  crop {\n    top,\n    bottom,\n    left,\n    right\n  },\n  alt,\n  priority,\n  caption,\n  _type,\n  aspectRatio,\n  objectFit\n },\n    "slug": store.slug.current,\n    store{\n      title,\n      "slug": slug.current,\n      previewImageUrl,\n      gid,\n      status,\n      priceRange{\n        minVariantPrice,\n        maxVariantPrice\n      }\n    },\n  }\n': ALL_PRODUCTS_QUERYResult
+    '\n  *[_type == "product" && store.slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    description,\n    "featuredImage": images[0]{ image{ \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n } },\n    "galleryImages": images[1...10]{ image{ \n  asset->{\n    _id,\n    url\n  },\n  alt\n } },\n    productDetails[]{\n      title,\n      text\n    },\n    store{\n      title,\n      "slug": slug.current,\n      previewImageUrl,\n      descriptionHtml,\n      gid,\n      priceRange{\n        minVariantPrice,\n        maxVariantPrice\n      },\n    },\n    \n  seo {\n    metaTitle,\n    metaDescription,\n    metaImage\n  }\n,\n    pageBuilder[]{\n      _key,\n      _type,\n      ...select(\n        _type == "hero" => { \n  content,\n  image {\n    \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n\n  },\n  overlay,\n  ctas[]{\n    \n  text,\n  url,\n  internalPage->{\n    _id,\n    _type,\n    title,\n    slug\n  },\n  style,\n  size\n\n  },\n  layout,\n  height\n },\n        _type == "features" => { \n  content,\n  features[]{\n    title,\n    description,\n    icon,\n    image {\n      \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n\n    }\n  },\n  cta {\n    \n  text,\n  url,\n  internalPage->{\n    _id,\n    _type,\n    title,\n    slug\n  },\n  style,\n  size\n\n  },\n  layout,\n  columns,\n  background\n },\n        _type == "featuredItems" => { \n  content,\n  items[]{\n    title,\n    description,\n    image {\n      \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n\n    },\n    item->{\n      _id,\n      _type,\n      title,\n      slug\n    },\n    ctaText\n  }\n },\n        _type == "productCarousel" => { \n  content,\n    products[]{\n      _id,\n      _key,\n      title,\n      content,\n      images[]{\n        \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n\n      },\n      slug,\n      store {\n        status,\n        priceRange {\n          minVariantPrice,\n          maxVariantPrice\n        },\n        tags\n    }\n  }\n },\n        _type == "newsletter" => { \n  _type,\n  _key\n },\n        _type == "productDetails" => { \n  cta {\n    \n  text,\n  url,\n  internalPage->{\n    _id,\n    _type,\n    title,\n    slug\n  },\n  style,\n  size\n\n  },\n  product->{\n    _id,\n    _key,\n    title,\n    content,\n    images[]{\n      \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n\n    },\n    slug,\n    store\n  }\n },\n        _type == "productGrid" => { \n  collection->{\n    _id,\n    title,\n    slug\n  },\n  products[]{\n    _id,\n    _key,\n    title,\n    content,\n    images[]{\n      \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n\n    },\n    slug,\n    store {\n      status,\n      priceRange {\n        minVariantPrice,\n        maxVariantPrice\n      },\n      tags\n    }\n  },\n  cta {\n    \n  text,\n  url,\n  internalPage->{\n    _id,\n    _type,\n    title,\n    slug\n  },\n  style,\n  size\n\n  }\n },\n        _type == "testimonials" => { \n  testimonials[]{\n    _key,\n    author,\n    quote\n  },\n  cta {\n    \n  text,\n  url,\n  internalPage->{\n    _id,\n    _type,\n    title,\n    slug\n  },\n  style,\n  size\n\n  }\n }\n      )\n    }\n  }\n': PRODUCT_PAGE_QUERYResult
+    '\n  *[_type == "product"] {\n    _id,\n    _type,\n    title,\n    images[]{ \n  alt,\n  _key,\n  asset->{\n    _id,\n    _type,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      },\n      palette {\n        dominant {\n          background,\n          foreground,\n          population,\n          title\n        }\n      }\n    }\n  },\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n },\n    "slug": store.slug.current,\n    store{\n      title,\n      "slug": slug.current,\n      previewImageUrl,\n      gid,\n      status,\n      priceRange{\n        minVariantPrice,\n        maxVariantPrice\n      }\n    },\n  }\n': ALL_PRODUCTS_QUERYResult
     '\n  *[_type == "page" && slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    "slug": slug.current,\n    \n  seo {\n    metaTitle,\n    metaDescription,\n    metaImage\n  }\n,\n  }': PAGE_QUERYResult
     '\n  *[_type == "siteSettings"][0]{\n    \n  seo {\n    metaTitle,\n    metaDescription,\n    metaImage\n  }\n,\n    companyName,\n    header {\n      logo,\n      mainMenu,\n      headerButtons\n    },\n    footer {\n      logo,\n      logoCaption,\n      footerMenu,\n      newsletter {\n        newsletter {\n          title,\n          description,\n          klaviyoListId\n        },\n        footerButtons,\n        footerText,\n      }\n    },\n    socialMedia {\n      facebook,\n      instagram,\n      twitter,\n      linkedin\n    }\n  }\n': SITE_SETTINGS_QUERYResult
     '\n  *[_type == "page" && defined(slug.current)] {\n    "slug": slug.current\n  }\n': PAGE_SLUGS_QUERYResult

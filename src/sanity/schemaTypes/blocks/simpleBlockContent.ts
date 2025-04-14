@@ -8,7 +8,6 @@ export const simpleBlockContent = defineType({
     defineArrayMember({
       type: 'block',
       styles: [
-        
         {title: 'Normal', value: 'normal'},
         {title: 'Large Text', value: 'large'},
         {title: 'Small Text', value: 'small'},

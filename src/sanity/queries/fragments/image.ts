@@ -1,8 +1,9 @@
 export const imageFragment = `
+  alt,
+  _key,
   asset->{
     _id,
     _type,
-    url,
     metadata {
       lqip,
       dimensions {
@@ -25,18 +26,6 @@ export const imageFragment = `
     height,
     width
   },
-  crop {
-    top,
-    bottom,
-    left,
-    right
-  },
-  alt,
-  priority,
-  caption,
-  _type,
-  aspectRatio,
-  objectFit
 `
 
 export const lightImageFragment = `

@@ -39,8 +39,8 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
     _type,
     title,
     description,
-    "featuredImage": images[0]{ ${imageFragment} },
-    "galleryImages": images[1...10]{ ${lightImageFragment} },
+    "featuredImage": images[0]{ image{ ${imageFragment} } },
+    "galleryImages": images[1...10]{ image{ ${lightImageFragment} } },
     productDetails[]{
       title,
       text
