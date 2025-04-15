@@ -1,11 +1,14 @@
+// /shop/[slug]
+
 import {sanityFetch} from '@/sanity/lib/live'
 import {PRODUCT_PAGE_QUERY, PRODUCT_SLUGS_QUERY} from '@/sanity/queries'
 import type {Metadata, ResolvingMetadata} from 'next'
 import {toPlainText} from 'next-sanity'
 import {draftMode} from 'next/headers'
-import { ImageComponent } from '@/components/ui/ImageComponent'
 import {notFound} from 'next/navigation'
-import { SimpleBlockContent } from '@/components/inputs/PortableTextComponents'
+import { ProductInfo } from '@/components/ProductInfo'
+import { shopifyFetch } from '@/shopify/fetch'
+import { PRODUCT_BY_ID_QUERY } from '@/shopify/queries'
 
 type Props = {
   params: Promise<{slug: string}>
@@ -38,24 +41,33 @@ export async function generateStaticParams() {
   return data
 }
 
-export default async function PageSlugRoute({params}: Props) {
-  const {data} = await sanityFetch({query: PRODUCT_PAGE_QUERY, params})
-  console.log('data:', data)
-  
-  if (!data?._id && !(await draftMode()).isEnabled) {
-    notFound()
-  }
 
-  const {title, description, featuredImage, galleryImages, productDetails, store, pageBuilder} = data ?? {}
+
+export default async function ProductPage({ params }: Props) {
+  const { data } = await sanityFetch({ query: PRODUCT_PAGE_QUERY, params })
+
+  
+
+  if (!data?._id && !(await draftMode()).isEnabled) { notFound() }
+  const { title, description, featuredImage, store } = data ?? {}
+  
+
+  const shopifyData = await shopifyFetch({
+    query: PRODUCT_BY_ID_QUERY,
+    variables: { id: store?.gid },
+  })
+
+  console.log('shopifyData:', shopifyData)
+  console.log('store:', store)
+  console.log('shopifyProduct variants:', shopifyData?.product?.variants?.edges?.map(v => v?.node))
+
 
   return (
-    <div>
-      <h1>product info</h1>
-      <p>{title ? title : store?.title ? store?.title : ''}</p>
-      {description ? <SimpleBlockContent value={description} /> : store?.descriptionHtml ? <p>{store.descriptionHtml}</p> : null} 
-      <div>
-        {featuredImage?.image?.asset && <ImageComponent image={featuredImage} />}
-      </div>
-    </div>
+    <ProductInfo
+      title={title}
+      description={description}
+      featuredImage={featuredImage}
+      shopifyProduct={shopifyData}
+    />
   )
 }

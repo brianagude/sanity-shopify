@@ -100,45 +100,44 @@ export const product = defineType({
             { name: 'maxVariantPrice', type: 'number' },
           ]
         },
-        // {
-        //   name: 'tags',
-        //   title: 'Tags',
-        //   type: 'array',
-        //   readOnly: true,
-        //   of: [
-        //     {
-        //       type: 'object',
-        //       name: 'option',
-        //       fields: [
-        //         { name: 'name', type: 'string', readOnly: true },
-        //         {
-        //           name: 'tags',
-        //           type: 'array',
-        //           of: [{ type: 'string' }],
-        //           readOnly: true,
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
-        // {
-        //   name: 'variants',
-        //   title: 'Variants',
-        //   type: 'array',
-        //   of: [
-        //     {
-        //       type: 'reference',
-        //       weak: false,
-        //       to: [{ type: 'productVariant' }],
-        //     },
-        //   ],
-        //   readOnly: true,
-        // },
+        {
+          name: 'tags',
+          title: 'Tags',
+          type: 'array',
+          hidden: true,
+          of: [
+            {
+              type: 'object',
+              name: 'option',
+              fields: [
+                { name: 'name', type: 'string', readOnly: true },
+                {
+                  name: 'tags',
+                  type: 'array',
+                  of: [{ type: 'string' }],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: 'variants',
+          title: 'Variants',
+          type: 'array',
+          hidden: true,
+          of: [
+            {
+              type: 'reference',
+              weak: false,
+              to: [{ type: 'productVariant' }],
+            },
+          ],
+        },
         {
           name: 'options',
           title: 'Options',
           type: 'array',
-          readOnly: true,
+          hidden: true,
           of: [
             {
               type: 'object',
@@ -155,32 +154,35 @@ export const product = defineType({
             },
           ],
         },
-        { name: 'productType', type: 'string', readOnly: true },
-        { name: 'vendor', type: 'string', readOnly: true },
-        { name: 'id', type: 'number', readOnly: true },
-        { name: 'gid', type: 'string', readOnly: true },
+        { name: 'productType', type: 'string' },
+        { name: 'vendor', type: 'string', hidden: true, },
+        { name: 'id', type: 'number', hidden: true, },
+        { name: 'gid', type: 'string' },
         { 
           name: 'createdAt', 
           type: 'datetime',
-          readOnly: true,
+          hidden: true,
           options: {
             dateFormat: 'MM-DD-YYYY',
             timeFormat: 'HH:mm',
           } 
         },
-        { name: 'isDeleted', type: 'boolean', readOnly: true },
+        { name: 'isDeleted', type: 'boolean' },
       ]
     })
   ],
   preview: {
     select: {
-      title: 'store.title',
+      title: 'title',
+      fallbackTitle: 'store.title',
       media: 'images.0',
+      slug: 'store.slug.current',
     },
-    prepare({ title, media }) {
+    prepare({ title, media, slug, fallbackTitle }) {
       return {
-        title,
-        media,
+        title: title || fallbackTitle,
+        media: media,
+        subtitle: `/shop/${slug}`,
       }
     },
   },
