@@ -1,6 +1,6 @@
 'use client'
-import { useCartStore } from '@/lib/store/useCartStore'
-import { createShopifyCart } from '@/lib/shopify/checkout'
+import { useCartStore } from '@/lib/cart/store'
+import { createShopifyCart } from '@/lib/cart/checkout'
 
 export const CartItems = () => {
   const items = useCartStore(state => state.items)

@@ -1,14 +1,7 @@
-import { getCartItems } from '@/lib/cart/cartActions'
+import { getCartItems } from '@/lib/cart/actions'
+import { storeDomain, publicAccessToken, apiVersion } from '@/shopify/env';
 
 export async function createShopifyCart() {
-  const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN
-  const publicAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_PUBLIC_ACCESS_TOKEN
-  const apiVersion = process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION
-
-  console.log('storeDomain:', storeDomain)
-  console.log('publicAccessToken:', publicAccessToken)
-  console.log('apiVersion:', apiVersion)
-  
   const items = getCartItems()
 
   const lines = items.map(item => ({
@@ -31,7 +24,7 @@ export async function createShopifyCart() {
       }
     }
   `
-  
+
   const res = await fetch(`https://${storeDomain}/api/${apiVersion}/graphql.json`, {
     method: 'POST',
     headers: {

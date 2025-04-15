@@ -1,4 +1,4 @@
-import { createShopifyCart } from '@/lib/shopify/checkout'
+import { createShopifyCart } from '@/lib/cart/checkout'
 
 const handleCheckout = async () => {
   try {

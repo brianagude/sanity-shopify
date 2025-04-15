@@ -1,8 +1,6 @@
-export async function shopifyFetch({ query, variables }: { query: string; variables?: Record<string, any> }) {
-  const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN
-  const publicAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_PUBLIC_ACCESS_TOKEN
-  const apiVersion = process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION
+import { storeDomain, publicAccessToken, apiVersion } from './env';
 
+export async function shopifyFetch({ query, variables }: { query: string; variables?: Record<string, any> }) {
   if (!storeDomain || !publicAccessToken || !apiVersion) {
     throw new Error('Missing Shopify environment variables')
   }

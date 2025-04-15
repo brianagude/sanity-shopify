@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { addToCart } from '@/lib/cart/cartActions'
+import { addToCart } from '@/lib/cart/actions'
 import { ImageComponent } from '@/components/ui/Image'
 import { SimpleBlockContent } from '@/components/inputs/PortableTextComponents'
 

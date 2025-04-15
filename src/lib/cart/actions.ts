@@ -1,4 +1,4 @@
-import { useCartStore } from '@/lib/store/useCartStore'
+import { useCartStore } from '@/lib/cart/store'
 
 type AddToCartInput = {
   productId: string
