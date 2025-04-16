@@ -41,33 +41,29 @@ export async function generateStaticParams() {
   return data
 }
 
-
-
 export default async function ProductPage({ params }: Props) {
   const { data } = await sanityFetch({ query: PRODUCT_PAGE_QUERY, params })
 
-  
-
   if (!data?._id && !(await draftMode()).isEnabled) { notFound() }
-  const { title, description, featuredImage, store } = data ?? {}
-  
+  const { title, description, store, previewImageUrl } = data ?? {}
+
+  console.log('Preview Image URL:', previewImageUrl)
+
+  if (!store?.gid) {
+    throw new Error('Product store ID is missing')
+  }
 
   const shopifyData = await shopifyFetch({
     query: PRODUCT_BY_ID_QUERY,
-    variables: { id: store?.gid },
+    variables: { id: store.gid },
   })
-
-  console.log('shopifyData:', shopifyData)
-  console.log('store:', store)
-  console.log('shopifyProduct variants:', shopifyData?.product?.variants?.edges?.map(v => v?.node))
-
-
+ 
   return (
     <ProductInfo
-      title={title}
-      description={description}
-      featuredImage={featuredImage}
+      title={title ?? ''}
+      description={description ?? []}
       shopifyProduct={shopifyData}
+      featuredImage={previewImageUrl || ''}
     />
   )
 }

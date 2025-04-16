@@ -2,20 +2,45 @@
 
 import { useState } from 'react'
 import { addToCart } from '@/lib/cart/actions'
-import { ImageComponent } from '@/components/ui/Image'
+// import { ImageComponent } from '@/components/ui/Image'
 import { SimpleBlockContent } from '@/components/inputs/PortableTextComponents'
+import type { SimpleBlockContent as SimpleBlockContentType } from '@/sanity/lib/types'
 
 type Props = {
   title: string
-  description?: any
-  featuredImage: any
-  shopifyProduct: any
+  description?: SimpleBlockContentType
+  featuredImage?: string
+  shopifyProduct: {
+    id: string
+    title: string
+    description: string
+    image: {
+      asset: {
+        url: string
+      }
+    }
+    product: {
+      variants: {
+        edges: { 
+          node: {
+            id: string
+            title: string
+            price: { amount: string }
+            availableForSale: boolean
+            image?: {
+              url: string
+            }
+          }
+        }[]
+      }
+    }
+  }
 }
 
 export const ProductInfo = ({ title, description, featuredImage, shopifyProduct }: Props) => {
   console.log('Shopify Product:', shopifyProduct)
   const variants = shopifyProduct?.product?.variants?.edges?.map(v => v?.node) || []
-  const options = shopifyProduct?.options || []
+  // const options = shopifyProduct?.options || []
 
   console.log('Variants:', variants)
 
@@ -36,7 +61,7 @@ export const ProductInfo = ({ title, description, featuredImage, shopifyProduct 
       productId: shopifyProduct.id,
       variantId: selectedVariant.id,
       title: shopifyProduct.title || title,
-      image: featuredImage?.image?.asset?.url || selectedVariant?.image?.url || '',
+      image: featuredImage || '',
       price: parseFloat(selectedVariant?.price?.amount || '0'),
     })
   }

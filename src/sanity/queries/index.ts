@@ -39,6 +39,7 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
     _type,
     title,
     description,
+    "previewImageUrl": images[0].image.asset->url,
     "featuredImage": images[0]{ image{ ${imageFragment} } },
     "galleryImages": images[1...10]{ image{ ${lightImageFragment} } },
     productDetails[]{
@@ -46,15 +47,11 @@ export const PRODUCT_PAGE_QUERY = defineQuery(`
       text
     },
     store{
-      title,
       "slug": slug.current,
-      previewImageUrl,
-      descriptionHtml,
       gid,
-      priceRange{
-        minVariantPrice,
-        maxVariantPrice
-      },
+      "price": priceRange.minVariantPrice,
+      title,
+      descriptionHtml,
     },
     ${seoFragment},
     pageBuilder[]{
