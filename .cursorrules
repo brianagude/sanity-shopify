@@ -1,0 +1,56 @@
+rules:
+# === TypeScript Rules ===
+typescript:
+  noAutoCreateTypes: true
+  noAutoModifyTypes: true
+  allowExplicitTypeEdits: true
+  inferTypesFromQueries: false
+  preferExistingTypes: true
+  typeFilePriority:
+    - src/sanity/types.ts
+  requireConfirmationForAutoImports: true
+
+# === Sanity & GROQ Query Rules ===
+sanity:
+  autoSchemaExtension: false
+  autoQueryAdjustments: false
+
+groq:
+  # Enforce correct use of -> for references
+  enforceDereferenceOperator: true
+
+  # Ensure object spread (...) is used correctly
+  enforceObjectSpreadUsage: true
+
+  # Always include _id, _key, and _type in queries
+  enforceRequiredFields:
+    - _id
+    - _key
+    - _type
+
+  # Limit query depth to prevent overly complex queries
+  maxDereferenceDepth: 3
+
+  # Warn if deprecated fields or patterns are used
+  warnOnDeprecatedUsage: true
+
+  # Require asset fields to explicitly fetch URLs
+  enforceAssetFetching: true # Example: asset->url
+
+# === General Safety Rules ===
+general:
+  confirmBulkChanges: true
+  confirmGeneratedCode: true
+
+# === Custom Behavior for GROQ Queries ===
+fileSpecificRules:
+  - pattern: "src/sanity/lib/queries.ts"
+    rules:
+      groq:
+        enforceDereferenceOperator: true
+        enforceObjectSpreadUsage: true
+        enforceRequiredFields:
+          - _id
+          - _key
+          - _type
+        maxDereferenceDepth: 2
