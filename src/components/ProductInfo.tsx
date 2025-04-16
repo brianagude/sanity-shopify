@@ -43,12 +43,8 @@ export const ProductInfo = ({ title, description, featuredImage, shopifyProduct 
   // const options = shopifyProduct?.options || []
 
   console.log('Variants:', variants)
-
-  // Just use the first variant as the default
   const [selectedVariant, setSelectedVariant] = useState(variants[0])
-
   console.log('Selected Variant:', selectedVariant)
-
   const hasMultipleVariants = variants.length > 1
 
   const handleAdd = () => {
